@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 
@@ -142,7 +141,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Stack(
             children: [
               // This empty container is given a width and height to set the size of the stack
-              Container(
+              SizedBox(
                 height: height / 2,
                 width: width,
               ),
@@ -195,11 +194,9 @@ class _MyHomePageState extends State<MyHomePage> {
           Text('y: ${(event?.y ?? 0).toStringAsFixed(3)}'),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-            child: RaisedButton(
+            child: TextButton(
               onPressed: startTimer,
               child: const Text('Begin'),
-              color: Theme.of(context).primaryColor,
-              textColor: Colors.white,
             ),
           )
         ],

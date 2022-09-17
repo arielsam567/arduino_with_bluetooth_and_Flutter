@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-import '../TESTE.dart';
 import '../select_device/select_device_page.dart';
+import '../teste.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -51,9 +51,14 @@ class HomePageState extends State<HomePage> {
                     bluetoothProvider.lastSend.name
                 ),
               ),
-              ElevatedButton(onPressed: (){
-                bluetoothProvider.zerarAcelerometro = true;
-              }, child: const Text('Zerar acelerometro')
+              ElevatedButton(
+                  onPressed: (){
+                    bluetoothProvider.zerarAcelerometro = true;
+                  },
+                  child: const Text('Zerar acelerometro',
+                    style: TextStyle(
+                        color: Colors.white
+                    ),)
               ),
               const MyHomePage(title: '',),
             ],
