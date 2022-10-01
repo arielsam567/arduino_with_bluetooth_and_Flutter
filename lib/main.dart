@@ -1,13 +1,12 @@
-import 'package:bluetooth_brain/provider/bt_provider.dart';
+import 'package:bluetooth_brain/home.dart';
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:bluetooth_brain/pages/home/home_page.dart';
-import 'package:get/get.dart';
-import 'package:provider/provider.dart';
-import 'configs/themes/custom_themes.dart';
-import 'pages/graficos/home_graficos.dart';
 
-void main() {
-  Provider.debugCheckInvalidValueType = null;
+List<CameraDescription>? cameras;
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  cameras = await availableCameras();
   runApp(const MyApp());
 }
 
@@ -16,14 +15,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => BluetoothProvider(),
-      child: GetMaterialApp(
-        theme: CustomThemes.defaultTheme,
-        home: const Graficos(),
-      ),
+    return MaterialApp(
+      theme: ThemeData(primaryColor: Colors.deepPurple),
+      debugShowCheckedModeBanner: false,
+      home: const Home(),
     );
   }
 }
-
-
