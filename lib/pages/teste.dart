@@ -1,28 +1,23 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+class BolaGiroscopio extends StatefulWidget {
+  const BolaGiroscopio({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _BolaGiroscopioState createState() => _BolaGiroscopioState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _BolaGiroscopioState extends State<BolaGiroscopio> {
   // color of the circle
   Color color = Colors.greenAccent;
-
-  // event returned from accelerometer stream
   AccelerometerEvent? event;
-
-  // hold a refernce to these, so that they can be disposed
-   Timer? timer;
-   StreamSubscription? accel;
-
-  // positions and count
+  Timer? timer;
+  StreamSubscription? accel;
   double top = 125;
   double? left;
   int count = 0;

@@ -42,8 +42,7 @@ class BluetoothProvider extends ChangeNotifier{
   Future<void> _startDiscovery() async {
 
     try {
-      await FlutterBluetoothSerial.instance.getBondedDevices()
-          .then((List<BluetoothDevice> bondedDevices) {
+      await FlutterBluetoothSerial.instance.getBondedDevices().then((List<BluetoothDevice> bondedDevices) {
         for (var element in bondedDevices) {
           devices.add(
             BluetoothModel(name:
@@ -134,14 +133,7 @@ class BluetoothProvider extends ChangeNotifier{
 
   void teste() {
 
-    // Timer.periodic(const Duration(milliseconds: 500), (_) {
-    //   // if count has increased greater than 3 call pause timer to handle success
-    //   if(lastSend == comandos.PARADO){
-    //     connection!.output.add(ascii.encode('0:255'));
-    //   }
-    // });
-
-    streamAce = accelerometerEvents.listen((AccelerometerEvent event) {
+    streamAce = accelerometerEvents.listen((AccelerometerEvent event) async {
       if(zerarAcelerometro || lastAce == null){
         lastAce = event;
         zerarAcelerometro = false;
@@ -166,28 +158,37 @@ class BluetoothProvider extends ChangeNotifier{
           if(modulo(yVariation) > modulo(xVariation)){
             if(yVariation < -trash && lastSend != comandos.FRENTE ){
               lastSend = comandos.FRENTE;
-              connection!.output.add(ascii.encode('8:255'));
+              await done('8:255');
             }else if(yVariation > trash && lastSend != comandos.TRAS){
               lastSend = comandos.TRAS;
-              connection!.output.add(ascii.encode('2:255'));
+              await done('2:255');
             }
           }else{
             if(xVariation < -trash && lastSend != comandos.DIREIRA){
               lastSend = comandos.DIREIRA;
-              connection!.output.add(ascii.encode('6:255'));
-
+              await done('6:255');
             }else if(xVariation > trash && lastSend != comandos.ESQUERDA){
               lastSend = comandos.ESQUERDA;
-              connection!.output.add(ascii.encode('4:255'));
+              await done('4:255');
             }
           }
         }
       }else if(lastSend != comandos.PARADO){
         lastSend = comandos.PARADO;
-        connection!.output.add(ascii.encode('0:255'));
+        await done('0:255');
       }
       notifyListeners();
     });
+  }
+
+  Future<void> done(String comando) async {
+    connection!.output.add(ascii.encode(comando));
+    print('AFF $comando');
+
+    final valuee = await connection!.output.allSent;
+    // final value = await connection!.output.done;
+
+    print('AFF $valuee');
   }
 
 

@@ -4,7 +4,6 @@ import 'package:bluetooth_brain/pages/home/home_page.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'configs/themes/custom_themes.dart';
-import 'pages/graficos/home_graficos.dart';
 
 void main() {
   Provider.debugCheckInvalidValueType = null;
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
       create: (context) => BluetoothProvider(),
       child: GetMaterialApp(
         theme: CustomThemes.defaultTheme,
-        home: const Graficos(),
+        home: const HomePage(),
       ),
     );
   }

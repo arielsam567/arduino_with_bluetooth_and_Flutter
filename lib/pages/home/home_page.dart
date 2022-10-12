@@ -60,7 +60,7 @@ class HomePageState extends State<HomePage> {
                         color: Colors.white
                     ),)
               ),
-              const MyHomePage(title: '',),
+              const BolaGiroscopio(title: '',),
             ],
           ),
         ),
