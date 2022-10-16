@@ -1,4 +1,5 @@
 import 'package:bluetooth_brain/configs/themes/color_themes.dart';
+import 'package:bluetooth_brain/pages/select_device/select_device_2.dart';
 import 'package:bluetooth_brain/provider/bt_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -36,6 +37,8 @@ class HomePageState extends State<HomePage> {
           backgroundColor: bluetoothProvider.isConnected ? CustomColors.connected  : CustomColors.primary,
           onPressed: () {
             Get.to(const SelectDevicePage());
+            //Get.to( FindDevicesScreen());
+
           },
           child: const Icon(
             Icons.bluetooth,

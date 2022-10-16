@@ -30,6 +30,9 @@ class BluetoothProvider extends ChangeNotifier{
 
 
   init()  async {
+    if(devices.isNotEmpty){
+      devices.clear();
+    }
     _startDiscovery();
   }
 
@@ -95,7 +98,7 @@ class BluetoothProvider extends ChangeNotifier{
       connection = await BluetoothConnection.toAddress(address);
 
       connection!.input!.listen((Uint8List data) {
-        print('Data incoming a: $data');
+        //print('Data incoming a: $data');
 
         print('Data incoming: ${ascii.decode(data)}');
         connection!.output.add(data); // Sending data
@@ -182,13 +185,11 @@ class BluetoothProvider extends ChangeNotifier{
   }
 
   Future<void> done(String comando) async {
+    print('AFF ${DateTime.now()}');
     connection!.output.add(ascii.encode(comando));
-    print('AFF $comando');
+    await connection!.output.allSent;
+    print('AFF ${DateTime.now()}');
 
-    final valuee = await connection!.output.allSent;
-    // final value = await connection!.output.done;
-
-    print('AFF $valuee');
   }
 
 
